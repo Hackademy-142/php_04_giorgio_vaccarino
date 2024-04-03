@@ -112,3 +112,132 @@ class Burrito
 $elmuycalientenegrospecial = new Burrito(new LargeTortilla(), new CarolinaReaper(), new Carnita());
 
 $elmuycalientenegrospecial->ingredientes();
+
+// ESERCIZIO 2	
+
+// Ultimare l'esercizio dell'Esercito che abbiamo iniziato a lezione (può essere un esercito fantasy o di supereroi o di personaggi di videogiochi, anche qui potete sbizzarrirvi)
+
+abstract class Defense
+{
+    abstract public function defenseType();
+}
+
+class Tower extends Defense
+{
+    public function defenseType()
+    {
+        echo "Al mio segnale scatenate l'inferno \n";
+    }
+}
+
+class Trench extends Defense
+{
+    public function defenseType()
+    {
+        echo "Mi nascondo ciaooo \n";
+    }
+}
+
+abstract class Attack
+{
+    abstract public function attackType();
+}
+
+class Tank extends Attack
+{
+    public function attackType()
+    {
+        echo "I'm a tank \n";
+    }
+}
+
+class Bomb extends Attack
+{
+    public function attackType()
+    {
+        echo "Boom \n";
+    }
+}
+
+class Army
+{
+    public $defense, $attack;
+
+    public function __construct(Defense $a, Attack $b)
+    {
+        $this->defense = $a;
+        $this->attack = $b;
+    }
+
+    public function combat()
+    {
+        $this->defense->defenseType();
+        $this->attack->attackType();
+    }
+}
+
+$esercito = new Army(new Tower(), new Bomb());
+$esercito->combat();
+
+// ESERCIZIO SUI TRAIT
+
+// Crea un trait chiamato “Calculator“ definendo le seguenti operazioni tra numeri:
+
+trait Calculator
+{
+    public function sum($a, $b) {
+        return $a + $b;
+      }
+      public function sub($a, $b) {
+        return $a - $b;
+      }
+      public function mul($a, $b) {
+        return $a * $b;
+      }
+      public function div($a, $b) {
+        return $a / $b;
+      }
+      public function sqr($a){
+        return sqrt($a);
+      }
+}
+
+// Crea una classe Rettangolo con due attributi
+// Base (b);
+// Altezza (h);
+// Importare nella classe il trait
+// Dentro la classe Rettangolo crea tre metodi che vanno a calcolare:
+// Area → b * h;
+// Perimetro → 2 * b + 2 * h;
+// Diagonale → √ hˆ2 + bˆ2 (Tutto sotto radice)
+// TIP: vedere il metodo di php sqrt()
+// I metodi della classe rettangolo devono sfruttare al loro interno le operazioni fornite dal trait Calculator
+
+class Rettangolo
+{
+    use Calculator;
+
+    public $b, $h;
+    public function __construct($b, $h)
+    {
+        $this->b = $b;
+        $this->h = $h;
+    }
+    public function area()
+    {
+        echo "Area: " . $this->mul($this->b, $this->h) . "\n";
+    }
+    public function perimetro()
+    {
+        echo "Perimetro: " . $this->sum($this->b * 2, $this->h * 2) . "\n";
+    }
+    public function diagonale()
+    {
+        echo "Diagonale: " . $this->sqr($this->sum($this->b ** 2, $this->h ** 2)) . "\n";
+    }
+}
+
+$terreno = new Rettangolo(10, 5);
+$terreno->area();
+$terreno->perimetro();
+$terreno->diagonale();
