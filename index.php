@@ -229,11 +229,11 @@ class Rettangolo
     }
     public function perimetro()
     {
-        echo "Perimetro: " . $this->sum($this->b * 2, $this->h * 2) . "\n";
+        echo "Perimetro: " . $this->sum($this->mul($this->b, 2), $this->mul($this->h, 2)) . "\n";
     }
     public function diagonale()
     {
-        echo "Diagonale: " . $this->sqr($this->sum($this->b ** 2, $this->h ** 2)) . "\n";
+        echo "Diagonale: " . $this->sqr($this->sum($this->mul($this->b, $this->b), $this->mul($this->h, $this->h))) . "\n";
     }
 }
 
